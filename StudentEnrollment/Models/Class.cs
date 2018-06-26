@@ -12,6 +12,12 @@ namespace StudentEnrollment.Models
 
         [Required]
         public ClassName ClassName { get; set; }
+        [Required]
+        public DateTime StartDate { get; set; }
+        [Required]
+        public DateTime EndDate { get; set; }
+
+        public string InstructorName { get; set; }
         public List<Student> Students { get; set; }
     }
 
