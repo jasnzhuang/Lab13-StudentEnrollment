@@ -26,7 +26,8 @@ namespace StudentEnrollment.Models
         Art,
         Biology,
         Chemistry,
-        [Display(Name = "Computer Science")] ComputerScience,
+        [Display(Name = "Computer Science")]
+        ComputerScience,
         English,
         History,
         Math,

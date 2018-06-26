@@ -11,13 +11,15 @@ namespace StudentEnrollment.Models
         public int ID { get; set; }
         
         [Required]
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        [Required]
+        public string LastName { get; set; }
         [Required]
         public GradeYear GradeYear { get; set; }
         [Required]
         public Class Class { get; set;}
 
-        public int GPA { get; set; }
+        public decimal GPA { get; set; }
     }
 
     public enum GradeYear
