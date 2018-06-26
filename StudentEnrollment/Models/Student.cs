@@ -13,6 +13,18 @@ namespace StudentEnrollment.Models
         [Required]
         public string Name { get; set; }
         [Required]
+        public GradeYear GradeYear { get; set; }
+        [Required]
         public Class Class { get; set;}
+
+        public int GPA { get; set; }
+    }
+
+    public enum GradeYear
+    {
+        Freshman,
+        Sophomore,
+        Junior,
+        Senior
     }
 }

@@ -8,7 +8,6 @@ namespace StudentEnrollment.Controllers
 {
     public class HomeController : Controller
     {
-        // Http Getter
         [HttpGet]
         public IActionResult Index()
         {
