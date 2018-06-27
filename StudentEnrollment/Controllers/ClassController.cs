@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using StudentEnrollment.Data;
 using StudentEnrollment.Models;
 using System;
@@ -26,12 +27,34 @@ namespace StudentEnrollment.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateClasses(Class newClass)
+        public async Task<IActionResult> CreateClasses([Bind("ID, ClassName, StartDate, EndDate, InstructorName")]Class newClass)
         {
             await _context.Classes.AddAsync(newClass);
             await _context.SaveChangesAsync();
 
             return RedirectToAction("CreateClasses", "Class");
+        }
+
+        // Update an Existing Class in the Database
+
+        [HttpGet]
+        public async Task<IActionResult> UpdateClasses(int? id)
+        {
+            if (id.HasValue)
+            {
+                Class thisClass = await _context.Classes.FirstOrDefaultAsync(c => c.ID == id);
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateClasses([Bind("ID, ClassName, StartDate, EndDate, InstructorName")]Class thisClass)
+        {
+            _context.Classes.Update(thisClass);
+            await _context.SaveChangesAsync();
+
+            return View(thisClass);
         }
 
 
