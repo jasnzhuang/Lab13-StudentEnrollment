@@ -21,24 +21,24 @@ namespace StudentEnrollment.Controllers
         // Add a Student to the Database
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult CreateStudent()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Student newStudent)
+        public async Task<IActionResult> CreateStudent(Student newStudent)
         {
             await _context.Students.AddAsync(newStudent);
             await _context.SaveChangesAsync();
 
-            return View();
+            return RedirectToAction("Student", "CreateStudent");
         }
         
         // Update a Student in the Database
 
         [HttpGet]
-        public async Task<IActionResult> Update(int? id)
+        public async Task<IActionResult> UpdateStudent(int? id)
         {
             if (id.HasValue)
             {
@@ -50,7 +50,7 @@ namespace StudentEnrollment.Controllers
         }
 
         //[HttpPost]
-        //public Task<IActionResult> Update(Student updatedStudent)
+        //public Task<IActionResult> UpdateStudent(Student updatedStudent)
         //{
         //    _context.Students.Add(updatedStudent);
 
