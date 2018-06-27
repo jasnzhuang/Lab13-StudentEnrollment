@@ -1,4 +1,5 @@
-﻿@model StudentEnrollment.Models.Student
+﻿@using StudentEnrollment.Models
+@model StudentEnrollment.Models.Student
 
 <h2>Add a New Student</h2>
 
@@ -14,22 +15,21 @@
     </div>
 
     <div>
-        <label asp-for="GradeYear">Grade: </label>
-        <input asp-for="GradeYear" asp-items="Html.GetEnumSelectList<GradeYear>()" />
+        <label asp-for="GPA">Overall GPA: </label>
+        <input asp-for="GPA" type="number" step="0.01" min="0.00" max="4.00" value="4.00" />
     </div>
 
     <div>
-        <label asp-for="GPA">Overall GPA: </label>
-        <input asp-for="GPA" type="number" step="0.01" min="0.00" max="4.00" value="4.00"/>
+        <label asp-for="GradeYear">Grade: </label>
+        <select asp-for="GradeYear" asp-items="Html.GetEnumSelectList<GradeYear>()"></select>
     </div>
 
     <div>
         <label asp-for="Class">Class: </label>
-        <input asp-for="Class" asp-items="Html.GetEnumSelectList<ClassName>()" />
+        <select asp-for="Class" asp-items="Html.GetEnumSelectList<ClassName>()"></select>
     </div>
 
     <div>
-        <input tpye="submit" value="Create" />
+        <input type="submit" value="Create" />
     </div>
-
 </form>

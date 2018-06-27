@@ -1,0 +1,32 @@
+﻿@using StudentEnrollment.Models
+@model StudentEnrollment.Models.Class
+
+<h2>Create a New Class</h2>
+
+<form method="post" asp-action="CreateClasses">
+
+    <div>
+        <label asp-for="ClassName">Choose a Class: </label>
+        <select asp-for="ClassName" asp-items="Html.GetEnumSelectList<ClassName>()"></select>
+    </div>
+
+    <div>
+        <label asp-for="StartDate">Start Date: </label>
+        <input asp-for="StartDate" type="date" />
+    </div>
+
+    <div>
+        <label asp-for="EndDate">End Date: </label>
+        <input asp-for="EndDate" type="date" />
+    </div>
+
+    <div>
+        <label asp-for="InstructorName">Instructor: </label>
+        <input asp-for="InstructorName" type="text" maxlength="40" />
+    </div>
+
+    <div>
+        <input type="submit" value="Save" />
+    </div>
+
+</form>
