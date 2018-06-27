@@ -57,8 +57,32 @@ namespace StudentEnrollment.Controllers
             return View(thisClass);
         }
 
+        // View Details of a Class from the Database
 
+        [HttpGet]
+        public async Task<IActionResult> DetailsClasses(int? id)
+        {
+            if (id.HasValue)
+            {
+                Class thisClass = await _context.Classes.FirstOrDefaultAsync(c => c.ID == id);
+            }
 
+            return View();
+        }
 
+        // Delete a Class from the Database
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteClasses(int? id)
+        {
+            if (id.HasValue)
+            {
+                Class thisClass = await _context.Classes.FirstOrDefaultAsync(c => c.ID == id);
+            }
+
+            return View();
+        }
+
+        []
     }
 }
