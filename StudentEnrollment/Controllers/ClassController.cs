@@ -18,6 +18,12 @@ namespace StudentEnrollment.Controllers
             _context = context;
         }
 
+        [HttpGet]
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         /*
          * View Details of a Class from the Database
         */
