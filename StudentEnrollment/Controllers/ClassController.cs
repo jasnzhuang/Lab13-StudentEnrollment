@@ -63,7 +63,7 @@ namespace StudentEnrollment.Controllers
             await _context.Classes.AddAsync(newClass);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Create", "Class");
+            return RedirectToAction("Details", "Class");
         }
 
         /*
@@ -74,22 +74,23 @@ namespace StudentEnrollment.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int? id)
         {
-            if (id.HasValue)
+            if (id == null)
             {
-                Class thisClass = await _context.Classes.FirstOrDefaultAsync(c => c.ID == id);
-                return View(thisClass);
+                return NotFound();
             }
 
-            return RedirectToAction("Index", "Class");
+            Class thisClass = await _context.Classes.FirstOrDefaultAsync(c => c.ID == id);
+
+            return View(thisClass);
         }
-        
-        [HttpPut]
-        public async Task<IActionResult> Update([Bind("ID, ClassName, StartDate, EndDate, InstructorName")]Class thisClass)
+
+        [HttpPost]
+        public async Task<IActionResult> Update(int id, [Bind("StartDate, EndDate, InstructorName")]Class thisClass)
         {
             _context.Classes.Update(thisClass);
             await _context.SaveChangesAsync();
 
-            return RedirectToRoute("Details", "Class");
+            return RedirectToAction("Details", "Class", thisClass.ID);
         }
 
         /*
