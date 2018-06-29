@@ -1,14 +1,14 @@
 ﻿@using StudentEnrollment.Models
 @model StudentEnrollment.Models.Class
 
-<h2>Create a New Class</h2>
 
-<form method="post" asp-action="CreateClasses">
+<h2>Edit</h2>
 
-    <div>
-        <label asp-for="ClassName">Choose a Class: </label>
-        <select asp-for="ClassName" asp-items="Html.GetEnumSelectList<ClassName>()"></select>
-    </div>
+<!-- Print the ClassName above the form.We shouldn't be able to edit the ClassName, as that is now a "new" class entirely,
+     so Admins should instead have to delete the Class and create a new one. -->
+<h3>@Model.ClassName</h3>
+
+<form method="post" asp-action="Update">
 
     <div>
         <label asp-for="StartDate">Start Date: </label>
@@ -26,7 +26,7 @@
     </div>
 
     <div>
-        <input type="submit" value="Save" />
+        <input type="submit" value="Save Changes" />
     </div>
 
 </form>

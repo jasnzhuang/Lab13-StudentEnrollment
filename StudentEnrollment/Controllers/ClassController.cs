@@ -18,6 +18,7 @@ namespace StudentEnrollment.Controllers
             _context = context;
         }
 
+        // Class/*
         [HttpGet]
         public IActionResult Index()
         {
@@ -28,8 +29,9 @@ namespace StudentEnrollment.Controllers
          * View Details of a Class from the Database
         */
 
+        // Class/Details/8
         [HttpGet]
-        public async Task<IActionResult> DetailsClasses(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id.HasValue)
             {
@@ -41,59 +43,63 @@ namespace StudentEnrollment.Controllers
                 }
             }
 
-            return RedirectToRoute("Class/Index");
+            return RedirectToAction("Index", "Class");
         }
 
         /*
          * Add a Class to the database
         */
 
+        // Class/Create/
         [HttpGet]
-        public IActionResult CreateClasses()
+        public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateClasses([Bind("ID, ClassName, StartDate, EndDate, InstructorName")]Class newClass)
+        public async Task<IActionResult> Create([Bind("ID, ClassName, StartDate, EndDate, InstructorName")]Class newClass)
         {
             await _context.Classes.AddAsync(newClass);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("CreateClasses", "Class");
+            return RedirectToAction("Details", "Class");
         }
 
         /*
          * Update an Existing Class in the Database
         */
 
+        // Class/Update/8
         [HttpGet]
-        public async Task<IActionResult> UpdateClasses(int? id)
+        public async Task<IActionResult> Update(int? id)
         {
-            if (id.HasValue)
+            if (id == null)
             {
-                Class thisClass = await _context.Classes.FirstOrDefaultAsync(c => c.ID == id);
-                return View(thisClass);
+                return NotFound();
             }
 
-            return RedirectToRoute("Class/Index");
+            Class thisClass = await _context.Classes.FirstOrDefaultAsync(c => c.ID == id);
+
+            return View(thisClass);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> UpdateClasses([Bind("ID, ClassName, StartDate, EndDate, InstructorName")]Class thisClass)
+        [HttpPost]
+        public async Task<IActionResult> Update(int id, [Bind("StartDate, EndDate, InstructorName")]Class thisClass)
         {
             _context.Classes.Update(thisClass);
             await _context.SaveChangesAsync();
 
-            return RedirectToRoute("Class/DetailsClasses");
+            return RedirectToAction("Details", "Class", thisClass.ID);
         }
-        
+
         /*
          * Delete a Class from the Database
         */
 
+        // Class/Delete/8
         [HttpGet]
-        public async Task<IActionResult> DeleteClasses(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id.HasValue)
             {
@@ -101,17 +107,17 @@ namespace StudentEnrollment.Controllers
                 return View(thisClass);
             }
 
-            return RedirectToRoute("Class/Index");
+            return RedirectToAction("Index", "Class");
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteClasses(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             Class thisClass = await _context.Classes.FindAsync(id);
             _context.Classes.Remove(thisClass);
             await _context.SaveChangesAsync();
 
-            return RedirectToRoute("Class/Index");
+            return RedirectToAction("Index", "Class");
         }
 
 
